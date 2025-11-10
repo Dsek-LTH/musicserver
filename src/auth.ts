@@ -45,7 +45,7 @@ export async function auth(jwt: string) {
 
 async function getPublicKey() {
   const response = await axios.get(
-    `${process.env.KEYCLOAK_BASE_URL}realms/${process.env.KEYCLOAK_REALM}`
+    process.env.AUTH_URL + ""
   );
   const public_key =
     (("-----BEGIN PUBLIC KEY-----\n" + response.data.public_key) as string) +

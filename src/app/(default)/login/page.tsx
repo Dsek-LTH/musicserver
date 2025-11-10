@@ -10,7 +10,7 @@ export default function LoginPage() {
     const state = Math.random().toString(36).substring(2, 20);
     cookies().set("state", state);
     redirect(
-      `${process.env.AUTH_AUTHORIZATION_URL}?client_id=${process.env.AUTH_CLIENT_ID}&redirect_uri=${process.env.BASE_URL + "login/callback"}&response_type=code&state=${state}&scope=openid`
+      `${process.env.AUTH_AUTHORIZATION_URL}?client_id=${process.env.AUTH_CLIENT_ID}&redirect_uri=${process.env.BASE_URL + "login/callback"}&response_type=code&state=${state}&scope=openid%20profile`
     );
   }
 

@@ -26,6 +26,7 @@ export async function GET(req: NextRequest) {
         {
           headers: {
             "Content-Type": "application/x-www-form-urlencoded",
+            "Authorization": `Basic ${Buffer.from(`${process.env.AUTH_CLIENT_ID}:${process.env.AUTH_CLIENT_SECRET}`).toString('base64')}`
           },
         }
       )

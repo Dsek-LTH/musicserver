@@ -15,6 +15,6 @@ ENV PORT=3000
 ENV NODE_ENV=production
 ENV HOSTNAME="0.0.0.0"
 
-RUN cp -r .next/static .next/standalone/static
+RUN cp -r .next/static .next/standalone/.next/static
 
 CMD [ "node", "./.next/standalone/server.js", "--port", "3000", "--host" ]

@@ -29,3 +29,10 @@ npm-debug.log*
 next-env.d.ts
 
 settings.json
+Dockerfile
+.dockerignore
+node_modules
+npm-debug.log
+README.md
+.next
+.git

@@ -73,11 +73,15 @@ export const removeFromQueueHandler = async (
   }
 };
 
-export async function getSettings() {
-  try {
+async function createSettingsFile() {
     const file = await fs.readFile(process.cwd() + "/settings.json", "utf8");
     const settings: Settings = JSON.parse(file);
     return settings;
+}
+
+export async function getSettings() {
+  try {
+    return createSettingsFile();
   } catch (err: any) {
     // If failed, and probably due to there not being a setting file previously, create a new one
     if (err.code === "ENOENT") {
@@ -97,7 +101,8 @@ export async function getSettings() {
         .catch((err) => {
           console.log(err);
         });
-      return getSettings();
+      //return getSettings();
+        return createSettingsFile();
     }
   }
 }

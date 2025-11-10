@@ -39,10 +39,7 @@ export default function ViewQueue() {
     <>
       {loading && (
         <div className="justify-center items-center flex w-full h-full text-[10vw] text-white">
-          <LoadingOutlined
-            onPointerEnterCapture={undefined}
-            onPointerLeaveCapture={undefined}
-          />
+          <LoadingOutlined />
         </div>
       )}
       {!loading && currentTrack !== null && tracks !== null && (

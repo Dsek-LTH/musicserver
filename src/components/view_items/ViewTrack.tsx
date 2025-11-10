@@ -53,11 +53,7 @@ export default function ViewTrack({
           <input type="hidden" name="track" value={JSON.stringify(track)} />
           <input type="hidden" name="user" value={""} />
           <button type="submit" className={styles.button}>
-            <PlusCircleFilled
-              className="justify-center"
-              onPointerEnterCapture={undefined}
-              onPointerLeaveCapture={undefined}
-            />
+            <PlusCircleFilled className="justify-center" />
           </button>
         </form>
       )}
@@ -103,11 +99,7 @@ export default function ViewTrack({
           <input type="hidden" name="index" value={customQueueIndex} />
           <input type="hidden" name="uri" value={track.uri} />
           <button type="submit" className={styles.button}>
-            <MinusCircleFilled
-              className="justify-center"
-              onPointerEnterCapture={undefined}
-              onPointerLeaveCapture={undefined}
-            />
+            <MinusCircleFilled className="justify-center" />
           </button>
         </form>
       )}

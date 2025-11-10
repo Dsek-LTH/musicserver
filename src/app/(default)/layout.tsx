@@ -44,11 +44,7 @@ export default async function DefaultLayout({
               href="/admin"
               className="transform transition hover:scale-105 hover:text-gray-400 hover:rotate-90"
             >
-              <SettingOutlined
-                className="flex aspect-square h-full justify-center"
-                onPointerEnterCapture={undefined}
-                onPointerLeaveCapture={undefined}
-              />
+              <SettingOutlined className="flex aspect-square h-full justify-center" />
             </Link>
           </div>
         </div>
@@ -57,11 +53,7 @@ export default async function DefaultLayout({
             href="/"
             className="transform transition hover:scale-105 hover:text-gray-400 mr-3"
           >
-            <HomeFilled
-              className="flex aspect-square h-full justify-center"
-              onPointerEnterCapture={undefined}
-              onPointerLeaveCapture={undefined}
-            />
+            <HomeFilled className="flex aspect-square h-full justify-center" />
           </Link>
           <form
             action="/results"
@@ -78,11 +70,7 @@ export default async function DefaultLayout({
                 type="submit"
                 className="w-auto bg-black h-full aspect-square text-2xl border border-transparent border-l-gray-400 text-white z-10 hover:bg-gray-800 focus:bg-gray-800"
               >
-                <SearchOutlined
-                  className="pl-[10px] pr-[10px] h-full text-base justify-center items-center flex w-auto"
-                  onPointerEnterCapture={undefined}
-                  onPointerLeaveCapture={undefined}
-                />
+                <SearchOutlined className="pl-[10px] pr-[10px] h-full text-base justify-center items-center flex w-auto" />
               </button>
             </div>
           </form>

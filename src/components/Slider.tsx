@@ -24,12 +24,7 @@ export default function Slider() {
 
   return (
     <div className={styles.slider}>
-      <SoundOutlined
-        className={styles.icon}
-        style={{ fontSize: 25 }}
-        onPointerEnterCapture={undefined}
-        onPointerLeaveCapture={undefined}
-      />
+      <SoundOutlined className={styles.icon} style={{ fontSize: 25 }} />
       <input
         type="range"
         min={0}

@@ -29,10 +29,7 @@ export default function ViewPlaylist({ playlist }: { playlist: PlaylistBase }) {
         <input type="hidden" name="uri" value={playlist?.uri} />
         <input type="hidden" name="shuffle" value={1} />
         <button type="submit" className={styles.button}>
-          <PlayCircleFilled
-            onPointerEnterCapture={undefined}
-            onPointerLeaveCapture={undefined}
-          />
+          <PlayCircleFilled />
         </button>
       </form>
       <a

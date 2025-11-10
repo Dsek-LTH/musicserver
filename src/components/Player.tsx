@@ -122,36 +122,20 @@ export default function Player() {
       </div>
       <div className={styles.buttonContainer}>
         <button className={styles.button} type="button" onClick={back}>
-          <LeftOutlined
-            className={`${styles.icon} ${styles.small}`}
-            onPointerEnterCapture={undefined}
-            onPointerLeaveCapture={undefined}
-          />
+          <LeftOutlined className={`${styles.icon} ${styles.small}`} />
         </button>
         {playing && (
           <button className={styles.button} type="button" onClick={stop}>
-            <PauseCircleFilled
-              className={styles.icon}
-              onPointerEnterCapture={undefined}
-              onPointerLeaveCapture={undefined}
-            />
+            <PauseCircleFilled className={styles.icon} />
           </button>
         )}
         {!playing && (
           <button className={styles.button} type="button" onClick={resume}>
-            <PlayCircleFilled
-              className={styles.icon}
-              onPointerEnterCapture={undefined}
-              onPointerLeaveCapture={undefined}
-            />
+            <PlayCircleFilled className={styles.icon} />
           </button>
         )}
         <button className={styles.button} type="button" onClick={forward}>
-          <RightOutlined
-            className={`${styles.icon} ${styles.small}`}
-            onPointerEnterCapture={undefined}
-            onPointerLeaveCapture={undefined}
-          />
+          <RightOutlined className={`${styles.icon} ${styles.small}`} />
         </button>
       </div>
       <Progress playbackState={currentTrack as PlaybackState} />

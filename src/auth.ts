@@ -34,10 +34,15 @@ export async function permission(
 
 export async function auth(jwt: string) {
   try {
-    verify(jwt, await getPublicKey(), {
+    const reponse = await axios.post(process.env.AUTH_INTROSPECT_URL!, `token=${jwt}`, {headers: {
+      'Content-Type': 'application/x-www-form-urlencoded',
+      "Authorization": `Basic ${Buffer.from(`${process.env.AUTH_CLIENT_ID}:${process.env.AUTH_CLIENT_SECRET}`).toString('base64')}`
+    }})
+    /*verify(jwt, await getPublicKey(), {
       algorithms: ["RS256"],
-    });
-    return true;
+    });*/
+    console.log({reponse});
+    return reponse.data.active;
   } catch (err) {
     return false;
   }

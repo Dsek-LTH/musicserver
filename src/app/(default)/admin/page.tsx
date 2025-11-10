@@ -1,5 +1,5 @@
 import { getAccessToken, removeAccessToken } from "@/API";
-import { auth, permission } from "@/auth";
+import { permission } from "@/auth";
 import SpotifyAuth from "@/components/SpotifyAuth";
 import { JwtToken, Settings } from "@/types";
 import { getSettings, updateSettings } from "@/utils";

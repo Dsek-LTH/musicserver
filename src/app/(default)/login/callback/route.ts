@@ -16,12 +16,12 @@ export async function GET(req: NextRequest) {
     headers();
     const token = await axios
       .post(
-        `${process.env.KEYCLOAK_BASE_URL}realms/${process.env.KEYCLOAK_REALM}/protocol/openid-connect/token`,
+        process.env.AUTH_TOKEN_URL!,
         {
           grant_type: "authorization_code",
           code: code,
           redirect_uri: url,
-          client_id: process.env.KEYCLOAK_CLIENT as string,
+          client_id: process.env.AUTH_CLIENT_ID!,
         },
         {
           headers: {
@@ -34,6 +34,8 @@ export async function GET(req: NextRequest) {
         log(err.response.status);
         log(JSON.stringify(err.response.data));
       });
+
+      console.log({token})
 
     const res = NextResponse.redirect(
       new URL("/", req.nextUrl.protocol + req.headers.get("host")),

@@ -6,7 +6,7 @@ export const config = {
 
 export const dynamic = "force-dynamic";
 
-export async function middleware(request: NextRequest) {
+export async function proxy(request: NextRequest) {
   const user = request.cookies.get("user")?.value;
   const jwt = request.cookies.get("jwt")?.value;
   if (!user && !jwt && request.nextUrl.pathname.startsWith("/admin")) {

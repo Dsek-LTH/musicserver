@@ -8,7 +8,8 @@ export default function LoginPage() {
     "use server";
 
     const state = Math.random().toString(36).substring(2, 20);
-    cookies().set("state", state);
+    const cookieStore = await cookies();
+    cookieStore.set("state", state);
     redirect(
       `${process.env.AUTH_AUTHORIZATION_URL}?client_id=${process.env.AUTH_CLIENT_ID}&redirect_uri=${process.env.BASE_URL + "login/callback"}&response_type=code&state=${state}&scope=openid%20profile`
     );
@@ -18,7 +19,8 @@ export default function LoginPage() {
     "use server";
 
     const uuid = randomUUID();
-    cookies().set("user", uuid, {
+    const cookieStore = await cookies();
+    cookieStore.set("user", uuid, {
       maxAge: 365 * 86400,
     });
     console.log(await getWord(uuid));

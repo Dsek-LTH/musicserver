@@ -70,10 +70,11 @@ export async function removeFromCustomQueue(index: number, uri: string) {
 
 export async function addToCustomQueue(track: Track, user?: string) {
   try {
+    const cookieStore = await cookies();
     if (
       !(await permission(
-        cookies().get("user")?.value,
-        cookies().get("jwt")?.value
+        cookieStore.get("user")?.value,
+        cookieStore.get("jwt")?.value
       ))
     )
       return { success: false, message: responseMessages[0] };
@@ -104,10 +105,11 @@ export async function addToSpotifyQueue(track: Track) {
 
 export async function skipNext() {
   try {
+    const cookieStore = await cookies();
     if (
       !(await permission(
-        cookies().get("user")?.value,
-        cookies().get("jwt")?.value
+        cookieStore.get("user")?.value,
+        cookieStore.get("jwt")?.value
       ))
     )
       return { success: false, message: responseMessages[0] };
@@ -126,10 +128,11 @@ export async function skipNext() {
 
 export async function skipBack() {
   try {
+    const cookieStore = await cookies();
     if (
       !(await permission(
-        cookies().get("user")?.value,
-        cookies().get("jwt")?.value
+        cookieStore.get("user")?.value,
+        cookieStore.get("jwt")?.value
       ))
     )
       return { success: false, message: responseMessages[0] };
@@ -144,10 +147,11 @@ export async function skipBack() {
 
 export async function play(context_uri?: string, shuffle?: boolean) {
   try {
+    const cookieStore = await cookies();
     if (
       !(await permission(
-        cookies().get("user")?.value,
-        cookies().get("jwt")?.value
+        cookieStore.get("user")?.value,
+        cookieStore.get("jwt")?.value
       ))
     )
       return { success: false, message: responseMessages[0] };
@@ -171,10 +175,11 @@ export async function play(context_uri?: string, shuffle?: boolean) {
 
 export async function pause() {
   try {
+    const cookieStore = await cookies();
     if (
       !(await permission(
-        cookies().get("user")?.value,
-        cookies().get("jwt")?.value
+        cookieStore.get("user")?.value,
+        cookieStore.get("jwt")?.value
       ))
     )
       return { success: false, message: responseMessages[0] };
@@ -259,10 +264,11 @@ export async function getCurrentStatus() {
 
 export async function setVolume(value: number) {
   try {
+    const cookieStore = await cookies();
     if (
       !(await permission(
-        cookies().get("user")?.value,
-        cookies().get("jwt")?.value
+        cookieStore.get("user")?.value,
+        cookieStore.get("jwt")?.value
       ))
     )
       return { success: false, message: responseMessages[0] };

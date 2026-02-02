@@ -10,7 +10,8 @@ import { redirect } from "next/navigation";
 export default async function AdminPage() {
   const spotifyLoggedIn = await getAccessToken();
   const settings = await getSettings();
-  const jwt = cookies().get("jwt")?.value;
+  const cookieStore = await cookies();
+  const jwt = cookieStore.get("jwt")?.value;
   // Authenticated / permission
   const authenticated = await permission(undefined, jwt);
   // Check if user has any admin roles
@@ -119,7 +120,7 @@ export default async function AdminPage() {
           </form>
         )}
         {/* Guests have option to login */}
-        {!jwt && cookies().get("user")?.value && (
+        {!jwt && cookieStore.get("user")?.value && (
           <form
             action={async () => {
               "use server";

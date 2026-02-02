@@ -38,10 +38,11 @@ export const playHandler = async (prevState: any, formData: FormData) => {
 export const addToQueueHandler = async (prevState: any, formData: FormData) => {
   "use server";
   const data = formData.get("track");
-  let jwt: string | undefined = cookies().get("jwt")?.value;
+  const cookieStore = await cookies();
+  let jwt: string | undefined = cookieStore.get("jwt")?.value;
   let user: string | undefined = undefined;
   if (!jwt) {
-    const userid = cookies().get("user")?.value;
+    const userid = cookieStore.get("user")?.value;
     if (userid) {
       user = (await getWord(userid)) as string;
     }

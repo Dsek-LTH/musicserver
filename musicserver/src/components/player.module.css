@@ -1,0 +1,151 @@
+.container {
+  height: 50px;
+  width: 100%;
+  box-sizing: content-box;
+  display: flex;
+  overflow: visible;
+  z-index: 10;
+  background-color: black;
+  padding-bottom: 30px;
+  padding-top: 10px;
+  position: relative;
+  margin-top: -200px;
+}
+
+.button {
+  height: 100%;
+  width: auto;
+  aspect-ratio: 1 / 1;
+  background-color: transparent;
+  border: transparent;
+  border-radius: 50%;
+  color: white;
+}
+
+.button:hover {
+  cursor: pointer;
+  color: darkgray;
+}
+
+.button:active {
+  transform: scale(0.9);
+  color: gray;
+}
+
+.icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  aspect-ratio: 1 / 1;
+  font-size: 50px;
+}
+
+.small {
+  font-size: 25px;
+}
+
+.info {
+  position: relative;
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  width: 40%;
+  max-width: 300px;
+  height: auto;
+  align-self: end;
+  background-color: black;
+  border: 0px transparent;
+  outline: none;
+  overflow: hidden;
+}
+
+.infoHide {
+  position: relative;
+  cursor: pointer;
+  width: 40%;
+  max-width: 300px;
+  display: flex;
+  flex-direction: row;
+  background-color: black;
+  border: 0px transparent;
+  outline: none;
+  overflow: hidden;
+  padding-left: 10px;
+}
+
+.infoText {
+  width: 100%;
+  font-size: 1em;
+  padding-left: 5px;
+  margin-top: 10px;
+  height: 50px;
+  color: white;
+  text-align: left;
+  text-wrap: nowrap;
+  font-size: 12px;
+  /* animation: scrolling-text 5s linear infinite; */
+}
+
+.infoText:hover {
+  animation-play-state: paused;
+}
+
+.bar {
+  max-width: 700px;
+  width: 50%;
+  height: 5px;
+  background-color: gray;
+  border-radius: 5px;
+  align-self: center;
+  margin-left: 10px;
+  margin-right: 10px;
+}
+
+.link:hover {
+  text-decoration: underline;
+}
+
+.buttonContainer {
+  display: flex;
+  flex-direction: row;
+  min-width: 150px;
+}
+
+.slider {
+  align-self: center;
+  height: 30px;
+  display: flex;
+  justify-content: center;
+  margin-left: auto;
+  margin-right: 10px;
+}
+
+@media only screen and (max-width: 800px) {
+  .bar {
+    display: none;
+  }
+
+  .buttonContainer {
+    margin-left: auto;
+  }
+
+  .info,
+  .infoHide {
+    width: 100%;
+  }
+
+  .slider {
+    display: none;
+  }
+}
+
+@keyframes scrolling-text {
+  0% {
+    transform: translateX(0);
+  }
+
+  100% {
+    transform: translateX(-100%);
+  }
+}

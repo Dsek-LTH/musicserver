@@ -13,10 +13,11 @@ const nextServer = next({ dev });
 const nextHandler = nextServer.getRequestHandler();
 
 nextServer.prepare().then(() => {
-  const expressServer = express();
+  const expressServer = express(); // Server for websocket
   const server = createServer(expressServer);
   const io = new Server(server);
   expressServer.get("/{*splat}", (req, res) => {
+    // Reroute to next server handler
     return nextHandler(req, res);
   });
   server.listen(port, () => {

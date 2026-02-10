@@ -10,7 +10,7 @@ export async function proxy(request: NextRequest) {
   const user = request.cookies.get("user")?.value;
   const jwt = request.cookies.get("jwt")?.value;
   if (!user && !jwt && request.nextUrl.pathname.startsWith("/admin")) {
-    return Response.redirect(new URL("/login", request.url));
+    return NextResponse.redirect(new URL("/login", request.url));
   }
 
   if (
@@ -18,6 +18,8 @@ export async function proxy(request: NextRequest) {
     request.nextUrl.pathname.startsWith("/login") &&
     !request.nextUrl.searchParams.get("guest")
   ) {
-    return Response.redirect(new URL("/", request.url));
+    return NextResponse.redirect(new URL("/", request.url));
   }
+
+  return NextResponse.next();
 }

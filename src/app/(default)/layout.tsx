@@ -40,7 +40,7 @@ export default async function DefaultLayout({
             Music server
           </Link>
           <div className="absolute right-0 mr-4 flex">
-            <span className="!text-lg mr-4">{await getUser()}</span>
+            <span className="text-lg! mr-4">{await getUser()}</span>
             <Link
               href="/admin"
               className="transform transition hover:scale-105 hover:text-gray-400 hover:rotate-90"

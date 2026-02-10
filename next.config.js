@@ -12,4 +12,19 @@ const nextConfig = {
   reactStrictMode: false,
 };
 
-module.exports = nextConfig;
+module.exports = {
+  nextConfig,
+  async headers() {
+    return [
+      {
+        source: "/",
+        headers: [
+          {
+            key: "content-type",
+            value: "text/x-component",
+          },
+        ],
+      },
+    ];
+  },
+};

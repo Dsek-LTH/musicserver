@@ -43,9 +43,9 @@ export default async function DefaultLayout({
             <span className="text-lg! mr-4">{await getUser()}</span>
             <Link
               href="/admin"
-              className="transform transition hover:scale-105 hover:text-gray-400 hover:rotate-90"
+              className="transform transition hover:scale-110 hover:text-gray-400 hover:rotate-180"
             >
-              <SettingOutlined className="flex aspect-square h-full justify-center" />
+              <SettingOutlined className="flex aspect-square h-full " />
             </Link>
           </div>
         </div>

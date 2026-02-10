@@ -92,7 +92,7 @@ export default function Player() {
             className={styles.icon}
             src={
               (currentTrack?.item as Track)?.album?.images[0]?.url ??
-              "/next.svg"
+              "/placeholder-album-cover.jpg"
             }
           />
         </div>

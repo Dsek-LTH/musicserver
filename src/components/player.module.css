@@ -8,8 +8,8 @@
   background-color: black;
   padding-bottom: 30px;
   padding-top: 10px;
-  position: relative;
-  margin-top: -200px;
+  position: sticky;
+  margin-top: -160px;
 }
 
 .button {
@@ -39,6 +39,11 @@
   height: 100%;
   aspect-ratio: 1 / 1;
   font-size: 50px;
+  margin-left: -10px;
+}
+
+.infoHide .icon {
+  margin-left: 0px;
 }
 
 .small {
@@ -54,10 +59,10 @@
   max-width: 300px;
   height: auto;
   align-self: end;
-  background-color: black;
   border: 0px transparent;
   outline: none;
   overflow: hidden;
+  padding-left: 10px;
 }
 
 .infoHide {

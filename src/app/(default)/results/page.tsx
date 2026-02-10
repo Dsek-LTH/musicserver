@@ -1,22 +1,23 @@
 import { PlaylistBase } from "@/types";
-import { addToCustomQueue, play, search } from "@/API";
+import { addToCustomQueue, play, searchSDK } from "@/API";
 import ViewTrack from "@/components/view_items/ViewTrack";
 import { SimplifiedAlbum, Track } from "@spotify/web-api-ts-sdk";
 import ViewPlaylist from "@/components/view_items/ViewPlaylist";
 import ViewAlbum from "@/components/view_items/ViewAlbum";
 import { redirect } from "next/navigation";
+import { use } from "react";
 
 export default async function SearchPage({
   searchParams,
 }: {
-  searchParams: { [key: string]: string | string[] | undefined };
+  searchParams: Promise<{ [key: string]: string | string[] | undefined }>;
 }) {
-  const searchQuery = searchParams["search"];
-  if (!searchQuery) {
+  const { search } = await searchParams;
+  if (!search) {
     redirect("/");
   }
 
-  const data = await search(searchQuery as string);
+  const data = await searchSDK(search as string);
 
   return (
     <div className="w-full box-border pb-52">

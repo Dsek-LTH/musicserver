@@ -28,7 +28,7 @@ export async function updateAccessToken(accessToken: AccessToken) {
 
   sdk = SpotifyApi.withAccessToken(
     process.env.CLIENT_ID as string,
-    accessToken
+    accessToken,
   );
 
   log("Logged in to spotify");
@@ -42,7 +42,7 @@ export async function removeAccessToken() {
   redirect("/");
 }
 
-export async function search(query: string) {
+export async function searchSDK(query: string) {
   try {
     const response = await sdk?.search(query, ["track", "playlist", "album"]);
     log("Searched for " + query);
@@ -74,7 +74,7 @@ export async function addToCustomQueue(track: Track, user?: string) {
     if (
       !(await permission(
         cookieStore.get("user")?.value,
-        cookieStore.get("jwt")?.value
+        cookieStore.get("jwt")?.value,
       ))
     )
       return { success: false, message: responseMessages[0] };
@@ -109,7 +109,7 @@ export async function skipNext() {
     if (
       !(await permission(
         cookieStore.get("user")?.value,
-        cookieStore.get("jwt")?.value
+        cookieStore.get("jwt")?.value,
       ))
     )
       return { success: false, message: responseMessages[0] };
@@ -132,7 +132,7 @@ export async function skipBack() {
     if (
       !(await permission(
         cookieStore.get("user")?.value,
-        cookieStore.get("jwt")?.value
+        cookieStore.get("jwt")?.value,
       ))
     )
       return { success: false, message: responseMessages[0] };
@@ -151,7 +151,7 @@ export async function play(context_uri?: string, shuffle?: boolean) {
     if (
       !(await permission(
         cookieStore.get("user")?.value,
-        cookieStore.get("jwt")?.value
+        cookieStore.get("jwt")?.value,
       ))
     )
       return { success: false, message: responseMessages[0] };
@@ -179,7 +179,7 @@ export async function pause() {
     if (
       !(await permission(
         cookieStore.get("user")?.value,
-        cookieStore.get("jwt")?.value
+        cookieStore.get("jwt")?.value,
       ))
     )
       return { success: false, message: responseMessages[0] };
@@ -268,7 +268,7 @@ export async function setVolume(value: number) {
     if (
       !(await permission(
         cookieStore.get("user")?.value,
-        cookieStore.get("jwt")?.value
+        cookieStore.get("jwt")?.value,
       ))
     )
       return { success: false, message: responseMessages[0] };
@@ -283,7 +283,7 @@ export async function setVolume(value: number) {
 export async function getVolume() {
   try {
     const result = execSync(
-      "pactl list sinks | grep '^[[:space:]]Volume:' | head -n $(( $SINK + 1 )) | tail -n 1 | sed -e 's,.* \\([0-9][0-9]*\\)%.*,\\1,'"
+      "pactl list sinks | grep '^[[:space:]]Volume:' | head -n $(( $SINK + 1 )) | tail -n 1 | sed -e 's,.* \\([0-9][0-9]*\\)%.*,\\1,'",
     ).toString();
     return result;
   } catch (error) {

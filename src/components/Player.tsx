@@ -5,12 +5,18 @@ import {
   RightOutlined,
   PlayCircleFilled,
   PauseCircleFilled,
+  UpCircleFilled,
+  DownCircleFilled,
 } from "@ant-design/icons";
 import { getCurrentStatus, pause, play, skipBack, skipNext } from "@/API";
-import { PlaybackState, Track } from "@spotify/web-api-ts-sdk";
+import {
+  PlaybackState,
+  SimplifiedArtist,
+  Track,
+} from "@spotify/web-api-ts-sdk";
 import { useEffect, useState } from "react";
 import Image from "next/image";
-import Slider from "./Slider";
+import { GetArtist } from "./view_items/ViewTrack";
 import Progress from "./Progress";
 import { Toast } from "./Toast";
 import { APIResponse } from "@/types";
@@ -79,6 +85,37 @@ export default function Player() {
     setInfoHide(!infoHide);
   };
 
+  const artistList = () => {
+    if (currentTrack != null) {
+      const t = currentTrack.item as Track;
+      return (
+        <p>
+          {t.artists.map(
+            (
+              artist: SimplifiedArtist,
+              index: number,
+              artists: SimplifiedArtist[],
+            ) => {
+              return (
+                <a className={styles.link} href={artist.external_urls.spotify}>
+                  {artist.name}
+                </a>
+              );
+            },
+          )}
+        </p>
+      );
+    } else {
+      return (
+        <p>
+          <a className={styles.link} href="">
+            Placeholder artists
+          </a>
+        </p>
+      );
+    }
+  };
+
   return (
     <div className={styles.container}>
       <div className={infoHide ? styles.infoHide : styles.info} onClick={hide}>
@@ -96,29 +133,58 @@ export default function Player() {
             }
           />
         </div>
-        <div style={{ overflow: "hidden" }}>
+        <div className={styles.infoTextWrapper}>
           <div className={styles.infoText}>
-            <p>
-              <a
-                href={currentTrack?.item?.external_urls?.spotify}
-                className={styles.link}
-              >
-                {currentTrack?.item?.name}
-              </a>
-            </p>
-            <p>
-              <a
-                href={
-                  (currentTrack?.item as Track)?.artists[0]?.external_urls
-                    ?.spotify
-                }
-                className={styles.link}
-              >
-                {(currentTrack?.item as Track)?.artists[0]?.name}
-              </a>
-            </p>
+            <div className={styles.marquee}>
+              <p>
+                <a
+                  className={styles.link}
+                  href={currentTrack?.item?.external_urls?.spotify}
+                >
+                  {currentTrack != null
+                    ? currentTrack?.item?.name
+                    : "Placeholder song name"}
+                </a>
+              </p>
+              <p>
+                <a
+                  className={styles.link}
+                  href={currentTrack?.item?.external_urls?.spotify}
+                >
+                  {currentTrack != null
+                    ? currentTrack?.item?.name
+                    : "Placeholder song name"}
+                </a>
+              </p>
+              <p>
+                <a
+                  className={styles.link}
+                  href={currentTrack?.item?.external_urls?.spotify}
+                >
+                  {currentTrack != null
+                    ? currentTrack?.item?.name
+                    : "Placeholder song name"}
+                </a>
+              </p>
+            </div>
+            <div className={styles.marquee}>
+              {artistList()}
+              {artistList()}
+              {artistList()}
+            </div>
           </div>
         </div>
+        <button className={styles.infoButton} type="button" onClick={hide}>
+          {infoHide ? (
+            <UpCircleFilled
+              className={`${styles.icon} ${styles.small} ${styles.infoIndicator}`}
+            />
+          ) : (
+            <DownCircleFilled
+              className={`${styles.icon} ${styles.small} ${styles.infoIndicator}`}
+            />
+          )}
+        </button>
       </div>
       <div className={styles.buttonContainer}>
         <button className={styles.button} type="button" onClick={back}>
@@ -139,7 +205,6 @@ export default function Player() {
         </button>
       </div>
       <Progress playbackState={currentTrack as PlaybackState} />
-      <Slider />
     </div>
   );
 }

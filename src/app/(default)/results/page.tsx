@@ -5,7 +5,6 @@ import { SimplifiedAlbum, Track } from "@spotify/web-api-ts-sdk";
 import ViewPlaylist from "@/components/view_items/ViewPlaylist";
 import ViewAlbum from "@/components/view_items/ViewAlbum";
 import { redirect } from "next/navigation";
-import { use } from "react";
 
 export default async function SearchPage({
   searchParams,

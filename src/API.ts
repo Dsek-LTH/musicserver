@@ -7,7 +7,7 @@ import {
 } from "@spotify/web-api-ts-sdk";
 import { execSync } from "child_process";
 import { cookies, headers } from "next/headers";
-import type { Queue } from "@spotify/web-api-ts-sdk";
+import type { PartialSearchResult, Queue } from "@spotify/web-api-ts-sdk";
 import { log } from "./utils";
 import { redirect } from "next/navigation";
 import { permission } from "./auth";
@@ -262,32 +262,32 @@ export async function getCurrentStatus() {
   }
 }
 
-export async function setVolume(value: number) {
-  try {
-    const cookieStore = await cookies();
-    if (
-      !(await permission(
-        cookieStore.get("user")?.value,
-        cookieStore.get("jwt")?.value,
-      ))
-    )
-      return { success: false, message: responseMessages[0] };
-    execSync(`pactl set-sink-volume @DEFAULT_SINK@ ${value}%`);
-    return { success: true };
-  } catch (error) {
-    log("Volume set failed");
-    return { success: false, message: "Couldn't set volume" };
-  }
-}
+// export async function setVolume(value: number) {
+//   try {
+//     const cookieStore = await cookies();
+//     if (
+//       !(await permission(
+//         cookieStore.get("user")?.value,
+//         cookieStore.get("jwt")?.value,
+//       ))
+//     )
+//       return { success: false, message: responseMessages[0] };
+//     execSync(`pactl set-sink-volume @DEFAULT_SINK@ ${value}%`);
+//     return { success: true };
+//   } catch (error) {
+//     log("Volume set failed");
+//     return { success: false, message: "Couldn't set volume" };
+//   }
+// }
 
-export async function getVolume() {
-  try {
-    const result = execSync(
-      "pactl list sinks | grep '^[[:space:]]Volume:' | head -n $(( $SINK + 1 )) | tail -n 1 | sed -e 's,.* \\([0-9][0-9]*\\)%.*,\\1,'",
-    ).toString();
-    return result;
-  } catch (error) {
-    log("Couldn't get volume");
-    return { success: false, message: "Couldn't get volume" };
-  }
-}
+// export async function getVolume() {
+//   try {
+//     const result = execSync(
+//       "pactl list sinks | grep '^[[:space:]]Volume:' | head -n $(( $SINK + 1 )) | tail -n 1 | sed -e 's,.* \\([0-9][0-9]*\\)%.*,\\1,'",
+//     ).toString();
+//     return result;
+//   } catch (error) {
+//     log("Couldn't get volume");
+//     return { success: false, message: "Couldn't get volume" };
+//   }
+// }

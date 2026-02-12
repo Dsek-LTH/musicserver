@@ -18,12 +18,12 @@ export default function LoginPage() {
   async function createGuest() {
     "use server";
 
-    // const uuid = randomUUID();
-    // const cookieStore = await cookies();
-    // cookieStore.set("user", uuid, {
-    //   maxAge: 7 * 86400,
-    // });
-    // console.log(await getWord(uuid));
+    const uuid = randomUUID();
+    const cookieStore = await cookies();
+    cookieStore.set("user", uuid, {
+      maxAge: 7 * 86400,
+    });
+    console.log(await getWord(uuid));
     redirect("/");
   }
 

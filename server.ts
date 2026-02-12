@@ -16,7 +16,7 @@ nextServer.prepare().then(() => {
   const expressServer = express(); // Server for websocket
   const server = createServer(expressServer);
   const io = new Server(server);
-  expressServer.get("/{*splat}", (req, res) => {
+  expressServer.all("{*splat}", (req, res) => {
     // Reroute to next server handler
     return nextHandler(req, res);
   });

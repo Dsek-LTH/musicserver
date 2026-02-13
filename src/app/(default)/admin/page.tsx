@@ -9,6 +9,7 @@ import { redirect } from "next/navigation";
 
 export default async function AdminPage() {
   const spotifyLoggedIn = await getAccessToken();
+  console.log(spotifyLoggedIn);
   const settings = await getSettings();
   const cookieStore = await cookies();
   const jwt = cookieStore.get("jwt")?.value;
@@ -130,23 +131,24 @@ export default async function AdminPage() {
           >
             <button
               type="submit"
-              className="box-border w-full transform bg-green-600 p-2 transition hover:scale-105"
+              className="box-border w-full transform bg-green-600 p-2 transition hover:scale-105 cursor-pointer"
             >
               Login to account
             </button>
           </form>
         )}
-        {!spotifyLoggedIn?.access_token && <SpotifyAuth />}
-        {admin && spotifyLoggedIn?.access_token && (
-          <form action={removeAccessToken} className="mt-3">
-            <button
-              type="submit"
-              className="box-border w-full transform bg-red-600 p-2 transition hover:scale-105"
-            >
-              Logout of spotify
-            </button>
-          </form>
-        )}
+        {<SpotifyAuth />}
+        {(process.env.NODE_ENV === "development" || admin) &&
+          spotifyLoggedIn?.access_token && (
+            <form action={removeAccessToken} className="mt-3">
+              <button
+                type="submit"
+                className="box-border w-full transform bg-red-600 p-2 transition hover:scale-105 cursor-pointer"
+              >
+                Logout of spotify
+              </button>
+            </form>
+          )}
       </div>
     </div>
   );

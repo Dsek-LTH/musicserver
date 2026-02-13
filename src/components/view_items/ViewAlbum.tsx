@@ -6,11 +6,11 @@ import { SimplifiedAlbum, SimplifiedArtist } from "@spotify/web-api-ts-sdk";
 import { GetArtist } from "./ViewTrack";
 import { useEffect } from "react";
 import { Toast } from "../Toast";
-import { useFormState } from "react-dom";
+import { useActionState } from "react";
 import { playHandler } from "@/utils";
 
 export default function ViewAlbum({ album }: { album: SimplifiedAlbum }) {
-  const [state, formAction] = useFormState(playHandler, {
+  const [state, formAction] = useActionState(playHandler, {
     success: false,
     message: "",
   });

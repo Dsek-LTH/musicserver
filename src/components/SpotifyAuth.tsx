@@ -39,7 +39,7 @@ export default function SpotifyAuth() {
   return (
     <button
       onClick={loginSpotify}
-      className="box-border w-full transform bg-green-600 p-2 transition hover:scale-105"
+      className="box-border w-full transform bg-green-600 p-2 transition hover:scale-105 cursor-pointer"
     >
       Login to spotify
     </button>

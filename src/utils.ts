@@ -57,7 +57,7 @@ export const addToQueueHandler = async (prevState: any, formData: FormData) => {
 
 export const removeFromQueueHandler = async (
   prevState: any,
-  formData: FormData
+  formData: FormData,
 ) => {
   "use server";
   const data = formData.get("index");
@@ -66,7 +66,7 @@ export const removeFromQueueHandler = async (
   try {
     const response = await removeFromCustomQueue(
       Number.parseInt(data.toString()),
-      uri.toString()
+      uri.toString(),
     );
     return response;
   } catch {
@@ -75,9 +75,9 @@ export const removeFromQueueHandler = async (
 };
 
 async function createSettingsFile() {
-    const file = await fs.readFile(process.cwd() + "/settings.json", "utf8");
-    const settings: Settings = JSON.parse(file);
-    return settings;
+  const file = await fs.readFile(process.cwd() + "/settings.json", "utf8");
+  const settings: Settings = JSON.parse(file);
+  return settings;
 }
 
 export async function getSettings() {
@@ -86,24 +86,24 @@ export async function getSettings() {
   } catch (err: any) {
     // If failed, and probably due to there not being a setting file previously, create a new one
     if (err.code === "ENOENT") {
-      log("Settings file not found, creating a new one");
-      await fs
-        .writeFile(
-          process.cwd() + "/settings.json",
-          JSON.stringify({
-            votingEnabled: null,
-            enableGuests: null,
-            requireAccount: null,
-            bannedUsers: [],
-            enableAdminRoles: [],
-          }),
-          "utf8"
-        )
-        .catch((err) => {
-          console.log(err);
-        });
+      log("Settings file not found");
+      // await fs
+      //   .writeFile(
+      //     process.cwd() + "/settings.json",
+      //     JSON.stringify({
+      //       votingEnabled: null,
+      //       enableGuests: null,
+      //       requireAccount: null,
+      //       bannedUsers: [],
+      //       enableAdminRoles: [],
+      //     }),
+      //     "utf8",
+      //   )
+      //   .catch((err) => {
+      //     console.log(err);
+      //   });
       //return getSettings();
-        return createSettingsFile();
+      // return createSettingsFile();
     }
   }
 }
@@ -112,6 +112,6 @@ export async function updateSettings(updatedSettings: Settings) {
   await fs.writeFile(
     process.cwd() + "/settings.json",
     JSON.stringify(updatedSettings),
-    "utf8"
+    "utf8",
   );
 }

@@ -6,10 +6,10 @@ import { PlaylistBase } from "@/types";
 import { playHandler } from "@/utils";
 import { useEffect } from "react";
 import { Toast } from "../Toast";
-import { useFormState } from "react-dom";
+import { useActionState } from "react";
 
 export default function ViewPlaylist({ playlist }: { playlist: PlaylistBase }) {
-  const [state, formAction] = useFormState(playHandler, {
+  const [state, formAction] = useActionState(playHandler, {
     success: false,
     message: "",
   });

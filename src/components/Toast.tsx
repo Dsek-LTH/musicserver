@@ -12,7 +12,7 @@ export class Toast extends React.Component {
 
   static remove() {
     const toastContainer = createRoot(
-      document.getElementById("toast-container") as HTMLElement
+      document.getElementById("toast-container") as HTMLElement,
     );
     toastContainer.unmount();
     Toast.currentToast = false;
@@ -57,7 +57,7 @@ export class Toast extends React.Component {
     }
 
     const toastContainer = createRoot(
-      document.getElementById("toast-container") as HTMLElement
+      document.getElementById("toast-container") as HTMLElement,
     );
     toastContainer.render(<ToastComponent message={message} color={color} />);
 

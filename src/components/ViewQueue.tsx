@@ -13,27 +13,27 @@ export default function ViewQueue() {
   const [loading, setLoading] = useState<boolean>(true);
 
   // Continuously fetches queue from server
-  useEffect(() => {
-    const data = getQueue();
-    data.then((value: SongQueue | undefined | boolean) => {
-      if (!value) return;
-      setCustomTracks((value as SongQueue).customQueue);
-      setTracks((value as SongQueue).queue?.queue as Track[]);
-      setCurrentTrack((value as SongQueue).queue?.currently_playing as Track);
-      setLoading(false);
-    });
+  // useEffect(() => {
+  //   const data = getQueue();
+  //   data.then((value: SongQueue | undefined | boolean) => {
+  //     if (!value) return;
+  //     setCustomTracks((value as SongQueue).customQueue);
+  //     setTracks((value as SongQueue).queue?.queue as Track[]);
+  //     setCurrentTrack((value as SongQueue).queue?.currently_playing as Track);
+  //     setLoading(false);
+  //   });
 
-    setInterval(() => {
-      const data = getQueue();
-      data.then((value: SongQueue | undefined | boolean) => {
-        if (!value) return;
-        setCustomTracks((value as SongQueue).customQueue);
-        setTracks((value as SongQueue).queue?.queue as Track[]);
-        setCurrentTrack((value as SongQueue).queue?.currently_playing as Track);
-        if (loading) setLoading(false);
-      });
-    }, 1000);
-  }, []);
+  //   setInterval(() => {
+  //     const data = getQueue();
+  //     data.then((value: SongQueue | undefined | boolean) => {
+  //       if (!value) return;
+  //       setCustomTracks((value as SongQueue).customQueue);
+  //       setTracks((value as SongQueue).queue?.queue as Track[]);
+  //       setCurrentTrack((value as SongQueue).queue?.currently_playing as Track);
+  //       if (loading) setLoading(false);
+  //     });
+  //   }, 1000);
+  // }, []);
 
   return (
     <>

@@ -26,9 +26,9 @@ export async function GET(req: NextRequest) {
         {
           headers: {
             "Content-Type": "application/x-www-form-urlencoded",
-            "Authorization": `Basic ${Buffer.from(`${process.env.AUTH_CLIENT_ID}:${process.env.AUTH_CLIENT_SECRET}`).toString('base64')}`
+            Authorization: `Basic ${Buffer.from(`${process.env.AUTH_CLIENT_ID}:${process.env.AUTH_CLIENT_SECRET}`).toString("base64")}`,
           },
-        }
+        },
       )
       .catch((err) => {
         log("Couldn't get access token");
@@ -36,11 +36,9 @@ export async function GET(req: NextRequest) {
         log(JSON.stringify(err.response.data));
       });
 
-      console.log({token})
-
     const res = NextResponse.redirect(
       new URL("/", req.nextUrl.protocol + req.headers.get("host")),
-      { status: 302 }
+      { status: 302 },
     );
     res.cookies.set(
       "jwt",
@@ -49,7 +47,7 @@ export async function GET(req: NextRequest) {
         httpOnly: true,
         secure: true,
         maxAge: 7 * 86400,
-      }
+      },
     );
 
     return res;

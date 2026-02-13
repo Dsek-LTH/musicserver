@@ -3,7 +3,7 @@ import styles from "../view.module.css";
 import { PlusCircleFilled, MinusCircleFilled } from "@ant-design/icons";
 import { SimplifiedArtist, Track } from "@spotify/web-api-ts-sdk";
 import Image from "next/image";
-import { useFormState } from "react-dom";
+import { useActionState } from "react";
 import { addToQueueHandler, removeFromQueueHandler } from "@/utils";
 import { useEffect } from "react";
 import { Toast } from "../Toast";
@@ -19,14 +19,17 @@ export default function ViewTrack({
   customQueueIndex?: number;
   user?: string;
 }) {
-  const [state, formAction] = useFormState(addToQueueHandler, {
+  const [state, formAction] = useActionState(addToQueueHandler, {
     success: false,
     message: "",
   });
-  const [removeState, removeFormAction] = useFormState(removeFromQueueHandler, {
-    success: false,
-    message: "",
-  });
+  const [removeState, removeFormAction] = useActionState(
+    removeFromQueueHandler,
+    {
+      success: false,
+      message: "",
+    },
+  );
 
   useEffect(() => {
     if (state.message == "") return;

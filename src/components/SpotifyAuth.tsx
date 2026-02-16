@@ -1,13 +1,13 @@
 "use client";
 
-import { getAccessToken, updateAccessToken } from "@/API";
+import { hasAccessToken, updateAccessToken } from "@/API";
 import { getClientID, getRedirectUri } from "@/utils";
-import { AccessToken, SpotifyApi } from "@spotify/web-api-ts-sdk";
+import { SpotifyApi } from "@spotify/web-api-ts-sdk";
 
 export default function SpotifyAuth() {
   const loginSpotify = () => {
-    getAccessToken().then(async (value: AccessToken | null) => {
-      if (value === null) {
+    hasAccessToken().then(async (exists: boolean | null) => {
+      if (!exists) {
         console.log("No access token! Fetching a new one from spotify.");
         const clientid = await getClientID();
         const redirectUri = await getRedirectUri();

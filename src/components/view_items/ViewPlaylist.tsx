@@ -14,6 +14,8 @@ export default function ViewPlaylist({ playlist }: { playlist: PlaylistBase }) {
     message: "",
   });
 
+  console.log(playlist);
+
   useEffect(() => {
     if (state.message == "") return;
     if (state.success) {

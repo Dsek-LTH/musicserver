@@ -1,4 +1,4 @@
-import { getAccessToken } from "@/API";
+import { hasAccessToken } from "@/API";
 import PlayerFullscreen from "@/components/PlayerFullscreen";
 
 export default async function Web() {
@@ -6,7 +6,7 @@ export default async function Web() {
   // console.log(await getAccessToken());
 
   // This page needs to interact with backend otherwise it won't be able to get currently playing songs?
-  const loggedIn = await getAccessToken();
+  const loggedIn = await hasAccessToken();
   if (!loggedIn?.access_token) {
     return <h1>Not logged in!</h1>;
   }

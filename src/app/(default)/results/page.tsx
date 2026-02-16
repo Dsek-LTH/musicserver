@@ -1,5 +1,5 @@
 import { PlaylistBase } from "@/types";
-import { addToCustomQueue, play, searchSDK } from "@/API";
+import { addToCustomQueue, hasAccessToken, play, searchSDK } from "@/API";
 import ViewTrack from "@/components/view_items/ViewTrack";
 import { SimplifiedAlbum, Track } from "@spotify/web-api-ts-sdk";
 import ViewPlaylist from "@/components/view_items/ViewPlaylist";
@@ -17,6 +17,7 @@ export default async function SearchPage({
   }
 
   const data = await searchSDK(search as string);
+  const spotifyLoggedIn = await hasAccessToken();
 
   return (
     <div className="w-full box-border pb-52">

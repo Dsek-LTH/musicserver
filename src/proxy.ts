@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from "next/server";
-import { getAccessToken } from "./API";
+import { hasAccessToken } from "./API";
 
 export const config = {
   matcher: ["/", "/admin", "/results"],
@@ -10,7 +10,7 @@ export const dynamic = "force-dynamic";
 export async function proxy(request: NextRequest) {
   const user = request.cookies.get("user")?.value;
   const jwt = request.cookies.get("jwt")?.value;
-  const accessToken = await getAccessToken();
+  const accessToken = await hasAccessToken();
 
   if (!user && !jwt && request.nextUrl.pathname.startsWith("/admin")) {
     console.log("Non-authorized user trying to access admin page");

@@ -5,13 +5,13 @@ import {
   PlaybackState,
   Track,
 } from "@spotify/web-api-ts-sdk";
-import { execSync } from "child_process";
 import { cookies, headers } from "next/headers";
-import type { PartialSearchResult, Queue } from "@spotify/web-api-ts-sdk";
+import type { Queue } from "@spotify/web-api-ts-sdk";
 import { log } from "./utils";
 import { redirect } from "next/navigation";
 import { permission } from "./auth";
 import { SongQueue, SongQueueItem } from "./types";
+import { refresh } from "next/cache";
 
 let sdk: SpotifyApi | undefined;
 let active_device: string | null;
@@ -31,6 +31,8 @@ export async function updateAccessToken(accessToken: AccessToken) {
     accessToken,
   );
 
+  console.log(sdk);
+
   log("Logged in to spotify");
   redirect("/");
 }
@@ -39,12 +41,17 @@ export async function removeAccessToken() {
   sdk?.logOut();
   sdk = undefined;
   log("Logged out of spotify");
-  redirect("/");
+  refresh();
 }
 
 export async function searchSDK(query: string) {
   try {
-    const response = await sdk?.search(query, ["track", "playlist", "album"]);
+    const response = await sdk?.search(
+      query,
+      ["track", "playlist", "album"],
+      undefined,
+      10,
+    );
     log("Searched for " + query);
     return response;
   } catch (error: any) {
@@ -228,12 +235,8 @@ export async function getQueue() {
   }
 }
 
-export async function getAccessToken() {
-  if (sdk === undefined) {
-    return null;
-  } else {
-    return await sdk.getAccessToken();
-  }
+export async function hasAccessToken() {
+  return sdk !== undefined;
 }
 
 var playback: PlaybackState | undefined;
@@ -261,33 +264,3 @@ export async function getCurrentStatus() {
     return false;
   }
 }
-
-// export async function setVolume(value: number) {
-//   try {
-//     const cookieStore = await cookies();
-//     if (
-//       !(await permission(
-//         cookieStore.get("user")?.value,
-//         cookieStore.get("jwt")?.value,
-//       ))
-//     )
-//       return { success: false, message: responseMessages[0] };
-//     execSync(`pactl set-sink-volume @DEFAULT_SINK@ ${value}%`);
-//     return { success: true };
-//   } catch (error) {
-//     log("Volume set failed");
-//     return { success: false, message: "Couldn't set volume" };
-//   }
-// }
-
-// export async function getVolume() {
-//   try {
-//     const result = execSync(
-//       "pactl list sinks | grep '^[[:space:]]Volume:' | head -n $(( $SINK + 1 )) | tail -n 1 | sed -e 's,.* \\([0-9][0-9]*\\)%.*,\\1,'",
-//     ).toString();
-//     return result;
-//   } catch (error) {
-//     log("Couldn't get volume");
-//     return { success: false, message: "Couldn't get volume" };
-//   }
-// }

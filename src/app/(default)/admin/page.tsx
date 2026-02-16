@@ -1,4 +1,4 @@
-import { getAccessToken, removeAccessToken } from "@/API";
+import { hasAccessToken, removeAccessToken } from "@/API";
 import { permission } from "@/auth";
 import SpotifyAuth from "@/components/SpotifyAuth";
 import { JwtToken, Settings } from "@/types";
@@ -8,8 +8,7 @@ import { cookies } from "next/headers";
 import { redirect } from "next/navigation";
 
 export default async function AdminPage() {
-  const spotifyLoggedIn = await getAccessToken();
-  console.log(spotifyLoggedIn);
+  const spotifyLoggedIn = await hasAccessToken();
   const settings = await getSettings();
   const cookieStore = await cookies();
   const jwt = cookieStore.get("jwt")?.value;
@@ -137,9 +136,9 @@ export default async function AdminPage() {
             </button>
           </form>
         )}
-        {<SpotifyAuth />}
+        {!spotifyLoggedIn && <SpotifyAuth />}
         {(process.env.NODE_ENV === "development" || admin) &&
-          spotifyLoggedIn?.access_token && (
+          spotifyLoggedIn && (
             <form action={removeAccessToken} className="mt-3">
               <button
                 type="submit"

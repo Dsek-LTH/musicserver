@@ -23,7 +23,9 @@ export default async function AdminPage() {
             if (settings?.enableAdminRoles.includes(role)) return true;
           })
           .includes(true)
-      : false;
+      : process.env.NODE_ENV === "development"
+        ? true
+        : false;
 
   const OptionContainer = ({
     name,
@@ -51,7 +53,8 @@ export default async function AdminPage() {
             type={type}
             name={name}
             defaultValue={value}
-            className="text-sm w-2/3 overflow-y-auto"
+            className="text-lg w-2/3 overflow-y-auto border-solid border-2 rounded-lg pl-2
+            "
           />
         )}
       </div>
@@ -64,7 +67,7 @@ export default async function AdminPage() {
         <h1 className="mb-4 text-center text-3xl!">Settings</h1>
         {authenticated && admin && settings && (
           <form
-            className="flex flex-col justify-between"
+            className="flex flex-col justify-between border-2 border-white p-6 mb-4 overflow-hidden rounded-2xl bg-gray-900"
             action={async (formData: FormData) => {
               "use server";
               const newSettings: Settings = {
@@ -102,18 +105,18 @@ export default async function AdminPage() {
             <OptionContainer
               name="bannedUsers"
               text="Banned users"
-              value={settings.bannedUsers.join(",")}
+              value={settings.bannedUsers?.join(",")}
               type="text"
             />
             <OptionContainer
               name="enableAdminRoles"
               text="Admin roles"
-              value={settings.enableAdminRoles.join(",")}
+              value={settings.enableAdminRoles?.join(",")}
               type="text"
             />
             <button
               type="submit"
-              className="box-border w-full transform bg-slate-400 p-2 transition hover:scale-105"
+              className="box-border w-full transform bg-slate-400 p-2 transition hover:scale-105 mt-4 cursor-pointer "
             >
               Apply settings
             </button>

@@ -1,7 +1,7 @@
 import { createServer } from "http";
 import next from "next";
 import express from "express";
-import WebSocket, { WebSocketServer } from "ws";
+import { WebSocketServer } from "ws";
 
 // Reference:
 // https://github.com/dfjs/realtime-physical-spaces/blob/main/server.js
